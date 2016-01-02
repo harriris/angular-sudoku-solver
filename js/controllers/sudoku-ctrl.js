@@ -9,8 +9,8 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
         var boxSize;
         var preset;
         
-        $scope.sudokuSizes = [4, 9, 16];
-        $scope.selectedSudokuSize = $scope.sudokuSizes[1];
+        $scope.selectedSudokuSize = "9";
+        $scope.selectedLanguage = $translate.use();
         
         $scope.bPadding = function(row, col) {
             if ((row % boxSize == (boxSize-1)) && (col % boxSize != (boxSize-1)) && (row < $scope.selectedSudokuSize-1)  && (col < $scope.selectedSudokuSize)) {
@@ -26,8 +26,8 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             return false;      
         };
         
-        $scope.changeLanguage = function(langKey) {
-            $translate.use(langKey);
+        $scope.changeLanguage = function() {
+            $translate.use($scope.selectedLanguage);
         };
 
         $scope.checkValue = function(row, col) {

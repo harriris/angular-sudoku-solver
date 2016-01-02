@@ -10,7 +10,7 @@ table {
 }
 
 tr, td {
-    padding: 0px;
+    padding: 1px;
 }
 
 input {
@@ -36,10 +36,10 @@ button:active {
 }
 
 .bPadding {
-    padding-bottom: 0.2em;
+    padding-bottom: 4px;
 }
 
 .rbPadding {
-    padding-right: 0.2em;
-    padding-bottom: 0.2em;
+    padding-right: 4px;
+    padding-bottom: 4px;
 }

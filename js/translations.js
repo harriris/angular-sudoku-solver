@@ -1,5 +1,7 @@
 var lang_fi = {
+    'LANGUAGE': 'Kieli',
     'SUDOKU_SOLVER': 'Sudokun ratkaisija',
+    'SUDOKU_SIZE': 'Sudokun koko',
     'SOLVE': 'ratkaise',
     'CLEAR': 'tyhjennä',
     'UNDO': 'kumoa',
@@ -9,7 +11,9 @@ var lang_fi = {
 };
 
 var lang_en = {
+    'LANGUAGE': 'Language',
     'SUDOKU_SOLVER': 'Sudoku Solver',
+    'SUDOKU_SIZE': 'Sudoku Size',
     'SOLVE': 'solve',
     'CLEAR': 'clear',
     'UNDO': 'undo',

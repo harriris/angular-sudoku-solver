@@ -5,6 +5,7 @@
 	<title>{{'SUDOKU_SOLVER'| translate}}</title>
         <link rel="shortcut icon" href="">
         
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
         
 	<script src="js/lib/angular.min.js"></script>
@@ -21,26 +22,46 @@
         <script src="js/controllers/sudoku-ctrl.js"></script>
 </head>
 <body ng-controller="SudokuCtrl">
+ 
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label for="sudoku-size">{{'SUDOKU_SIZE' | translate}}:</label>
+             <select id="sudoku-size" class="form-control" ng-model="selectedSudokuSize" ng-change="clear()">
+                <option value="4">4&times;4</option>
+                <option value="9">9&times;9</option>
+                <option value="16">16&times;16</option>
+             </select>           
+        </div>
+        <div class="form-group">
+            <label for="language">{{'LANGUAGE' | translate}}:</label>
+            <select id="language" class="form-control" ng-model="selectedLanguage" ng-change="changeLanguage()">
+                <option value="fi">Suomi</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </form>
+    
+    <br>
 
-<table>
-    <tr ng-repeat="row in sudoku track by $index">
-        <td ng-repeat="column in row track by $index" ng-class="{'bPadding': bPadding($parent.$index, $index), 'rbPadding': rbPadding($parent.$index, $index)}">
-            <input type="text" ng-model="input[$parent.$index][$index]" ng-change="checkValue($parent.$index, $index)">
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr ng-repeat="row in sudoku track by $index">
+            <td ng-repeat="column in row track by $index" ng-class="{'bPadding': bPadding($parent.$index, $index), 'rbPadding': rbPadding($parent.$index, $index)}">
+                <input type="text" ng-model="input[$parent.$index][$index]" ng-change="checkValue($parent.$index, $index)">
+            </td>
+        </tr>
+    </table>
+    
+    <br>
 
-<br>
-
-<button title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
-    {{'SOLVE'| translate}}
-</button>
-<button title="{{'DESCRIPTION_CLEAR'| translate}}" ng-click="clear()">
-    {{'CLEAR'| translate}}
-</button>
-<button title="{{'DESCRIPTION_UNDO'| translate}}" ng-click="undo()">
-    {{'UNDO'| translate}}
-</button>
+    <button title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
+        {{'SOLVE'| translate}}
+    </button>
+    <button title="{{'DESCRIPTION_CLEAR'| translate}}" ng-click="clear()">
+        {{'CLEAR'| translate}}
+    </button>
+    <button title="{{'DESCRIPTION_UNDO'| translate}}" ng-click="undo()">
+        {{'UNDO'| translate}}
+    </button>
 
 </body>
 </html>
