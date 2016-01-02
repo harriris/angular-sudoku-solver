@@ -3,14 +3,25 @@
 }
 
 table {
-    background-color: #000000;
-    display: inline-block;
-    font-weight: bolder;
-    text-align: left;
+    margin: 1em auto;
+}
+td {
+    border: 1px solid;
+    text-align: center;
 }
 
-tr, td {
-    padding: 1px;
+tr.firstChild {
+    border-top: solid;
+}
+tr.nthChild td {
+   border-bottom: solid;
+}
+
+td.firstChild {
+    border-left: solid;
+}
+td.nthChild {
+    border-right: solid;
 }
 
 input {
@@ -33,13 +44,4 @@ button {
 
 button:active {
     box-shadow: none;
-}
-
-.bPadding {
-    padding-bottom: 4px;
-}
-
-.rbPadding {
-    padding-right: 4px;
-    padding-bottom: 4px;
 }

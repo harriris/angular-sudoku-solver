@@ -12,18 +12,12 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
         $scope.selectedSudokuSize = "9";
         $scope.selectedLanguage = $translate.use();
         
-        $scope.bPadding = function(row, col) {
-            if ((row % boxSize == (boxSize-1)) && (col % boxSize != (boxSize-1)) && (row < $scope.selectedSudokuSize-1)  && (col < $scope.selectedSudokuSize)) {
-                return true;
-            }
-            return false;
+        $scope.firstChild = function(index) {
+            return index == 0;
         };
         
-        $scope.rbPadding = function(row, col) {
-             if ((row % boxSize == (boxSize-1)) && (col % boxSize == (boxSize-1)) && (row < $scope.selectedSudokuSize-1) && (col < $scope.selectedSudokuSize-1)) {
-                return true;
-            }
-            return false;      
+        $scope.nthChild = function(index) {
+            return index % boxSize == (boxSize-1);
         };
         
         $scope.changeLanguage = function() {

@@ -40,18 +40,14 @@
             </select>
         </div>
     </form>
-    
-    <br>
 
     <table>
-        <tr ng-repeat="row in sudoku track by $index">
-            <td ng-repeat="column in row track by $index" ng-class="{'bPadding': bPadding($parent.$index, $index), 'rbPadding': rbPadding($parent.$index, $index)}">
+        <tr ng-repeat="row in sudoku track by $index" ng-class="{'firstChild': firstChild($index), 'nthChild': nthChild($index)}">
+             <td ng-repeat="column in row track by $index" ng-class="{'firstChild': firstChild($index), 'nthChild': nthChild($index)}">
                 <input type="text" ng-model="input[$parent.$index][$index]" ng-change="checkValue($parent.$index, $index)">
-            </td>
+            </td>           
         </tr>
     </table>
-    
-    <br>
 
     <button title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
         {{'SOLVE'| translate}}
