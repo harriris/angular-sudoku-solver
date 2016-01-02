@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html ng-app="sudokuSolver">
+<head>
+	<meta charset="utf-8">
+	<title>{{'SUDOKU_SOLVER'| translate}}</title>
+        <link rel="shortcut icon" href="">
+        
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+        
+	<script src="js/lib/angular.min.js"></script>
+        <script src="js/lib/bower-angular-translate-2.8.1/angular-translate.min.js"></script>
+        
+        <script src="js/app.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/translations.js"></script>
+        
+        <script src="js/services/sudoku-svc.js"></script>
+        
+        <script src="js/controllers/sudoku-ctrl.js"></script>
+</head>
+<body ng-controller="SudokuCtrl">
+
+<table id="sudoku">
+    <tr ng-repeat="row in sudoku track by $index">
+        <td ng-repeat="column in row track by $index" ng-class="{'bPadding': bPadding($parent.$index, $index), 'rbPadding': rbPadding($parent.$index, $index)}">
+            <input type="text" ng-model="input[$parent.$index][$index]" ng-change="checkValue($parent.$index, $index)">
+        </td>
+    </tr>
+</table>
+
+<br>
+
+<button title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
+    {{'SOLVE'| translate}}
+</button>
+<button title="{{'DESCRIPTION_CLEAR'| translate}}" ng-click="clear()">
+    {{'CLEAR'| translate}}
+</button>
+<button title="{{'DESCRIPTION_UNDO'| translate}}" ng-click="undo()">
+    {{'UNDO'| translate}}
+</button>
+
+</body>
+</html>

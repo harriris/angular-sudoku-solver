@@ -1,0 +1,45 @@
+﻿body {
+    text-align: center;
+}
+
+table {
+    background-color: #000000;
+    display: inline-block;
+    font-weight: bolder;
+    text-align: left;
+}
+
+tr, td {
+    padding: 0px;
+}
+
+input {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+button {
+    background-color: rgb(255, 165, 0);
+    color: #000000;
+    border: 1px ridge #666666;
+    box-shadow: 1px 1px 2px #000000;
+}
+
+button:active {
+    box-shadow: none;
+}
+
+.bPadding {
+    padding-bottom: 0.2em;
+}
+
+.rbPadding {
+    padding-right: 0.2em;
+    padding-bottom: 0.2em;
+}
