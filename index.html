@@ -10,7 +10,7 @@
         
 	<script src="js/lib/angular.min.js"></script>
         <script src="js/lib/bower-angular-translate-2.8.1/angular-translate.min.js"></script>
-        <script src="js/lib/angular-ui-bootstrap-0.14.3/ui-bootstrap-0.14.3.min.js"></script>
+        <script src="js/lib/angular-ui-bootstrap-0.14.3/ui-bootstrap-tpls-0.14.3.min.js"></script>
         
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
@@ -26,7 +26,7 @@
     <form class="form-inline" role="form">
         <div class="form-group">
             <label for="sudoku-size">{{'SUDOKU_SIZE' | translate}}:</label>
-             <select id="sudoku-size" class="form-control" ng-model="selectedSudokuSize" ng-change="clear()">
+             <select id="sudoku-size" class="form-control" ng-model="selectedSudokuSize" ng-change="init()">
                 <option value="4">4&times;4</option>
                 <option value="9">9&times;9</option>
                 <option value="16">16&times;16</option>
@@ -44,20 +44,36 @@
     <table>
         <tr ng-repeat="row in sudoku track by $index" ng-class="{'firstChild': firstChild($index), 'nthChild': nthChild($index)}">
              <td ng-repeat="column in row track by $index" ng-class="{'firstChild': firstChild($index), 'nthChild': nthChild($index)}">
-                <input type="text" ng-model="input[$parent.$index][$index]" ng-change="checkValue($parent.$index, $index)">
+                <button class="btn btn-link btn-block input-button"
+                       ng-bind="input[$parent.$index][$index]" 
+                       ng-click="openPopover($parent.$index, $index)"
+                       popover-placement="bottom"
+                       popover-is-open="isPopoverOpen($parent.$index, $index)"
+                       uib-popover-template="sudokuPopover.templateUrl">
+                </button>
             </td>           
         </tr>
     </table>
 
-    <button title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
+    <button class="main-button" title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
         {{'SOLVE'| translate}}
     </button>
-    <button title="{{'DESCRIPTION_CLEAR'| translate}}" ng-click="clear()">
+    <button class="main-button" title="{{'DESCRIPTION_CLEAR'| translate}}" ng-click="init()">
         {{'CLEAR'| translate}}
     </button>
-    <button title="{{'DESCRIPTION_UNDO'| translate}}" ng-click="undo()">
+    <button class="main-button" title="{{'DESCRIPTION_UNDO'| translate}}" ng-click="undo()">
         {{'UNDO'| translate}}
     </button>
+    
+    <script id="popoverTemplate.html" type="text/ng-template">
+        <table id="inputGrid">
+            <tr ng-repeat="row in sudokuPopover.inputGrid">
+                <td ng-repeat="col in row">
+                    <button class="btn btn-default btn-block" ng-click="insertValue(col)">{{col}}</button>
+                </td>
+            </tr>
+        </table>
+    </script>
 
 </body>
 </html>

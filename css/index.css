@@ -10,6 +10,14 @@ td {
     text-align: center;
 }
 
+#inputGrid {
+    margin: auto;
+}
+
+#inputGrid td {
+    border: none;
+}
+
 tr.firstChild {
     border-top: solid;
 }
@@ -24,7 +32,11 @@ td.nthChild {
     border-right: solid;
 }
 
-input {
+.input-button, .main-button {
+    color: #000000;
+}
+
+.input-button {
     margin: 0px;
     padding: 0px;
     border: none;
@@ -35,13 +47,16 @@ input {
     text-align: center;
 }
 
-button {
+.input-button:hover {
+    text-decoration: none;
+}
+
+.main-button {
     background-color: rgb(255, 165, 0);
-    color: #000000;
     border: 1px ridge #666666;
     box-shadow: 1px 1px 2px #000000;
 }
 
-button:active {
+.main-button:active {
     box-shadow: none;
 }

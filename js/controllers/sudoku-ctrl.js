@@ -9,8 +9,19 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
         var boxSize;
         var preset;
         
+        var initInputGrid = function(sudokuBoxSize) {
+            $scope.sudokuPopover.inputGrid = [];
+            for (var i = 0; i < sudokuBoxSize; i++) {
+                $scope.sudokuPopover.inputGrid[i] = [];
+                for (var j = 0; j < sudokuBoxSize; j++) {
+                    $scope.sudokuPopover.inputGrid[i][j] = i * sudokuBoxSize + j + 1;
+                }
+            }           
+        };
+        
         $scope.selectedSudokuSize = "9";
         $scope.selectedLanguage = $translate.use();
+        $scope.input = [];
         
         $scope.firstChild = function(index) {
             return index == 0;
@@ -23,7 +34,41 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
         $scope.changeLanguage = function() {
             $translate.use($scope.selectedLanguage);
         };
+        
+        $scope.openPopover = function(row, col) {
+            $scope.sudokuPopover.row = row;
+            $scope.sudokuPopover.col = col;
+        };
+        
+        $scope.isPopoverOpen = function(row, col) {
+            return $scope.sudokuPopover.row == row && $scope.sudokuPopover.col == col;
+        };
+        
+        $scope.sudokuPopover = {
+            templateUrl: 'popoverTemplate.html',
+            inputGrid: [],
+            row: -1,
+            col: -1
+        };
+        
+        $scope.insertValue = function(value) {
+            preset = angular.copy($scope.sudoku);
+            var row = $scope.sudokuPopover.row;
+            var col = $scope.sudokuPopover.col;
+            
+            if (!$scope.input[row]) {
+                $scope.input[row] = [];
+            }
+            
+            $scope.input[row][col] = value;
+            $scope.sudoku[row][col] = value;
+            preset[row][col] = value;
+            
+            $scope.sudokuPopover.row = -1;
+            $scope.sudokuPopover.col = -1;
+        };
 
+        // this is not used in the current version
         $scope.checkValue = function(row, col) {
             preset = angular.copy($scope.sudoku);
             
@@ -37,7 +82,6 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             if (!isNaN(intVal) && intVal <= $scope.selectedSudokuSize && (intVal.toString().length <= $scope.selectedSudokuSize.toString().length)) {
                 $scope.sudoku[row][col] = intVal;
                 preset[row][col] = intVal;
-                empty = false;
             }
             else if ($scope.input[row][col] === "") {
                 $scope.sudoku[row][col] = 0;
@@ -56,11 +100,14 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             }
         };
         
-        $scope.clear = function() {
+        $scope.init = function() {
             preset = angular.copy($scope.sudoku);
             $scope.sudoku = SudokuSvc.createEmpty($scope.selectedSudokuSize);
             $scope.input = [];
             boxSize = Math.sqrt($scope.selectedSudokuSize);
+            $scope.sudokuPopover.row = -1;
+            $scope.sudokuPopover.col = -1;       
+            initInputGrid(boxSize);
         };
         
         $scope.undo = function() {
@@ -81,7 +128,7 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             }
         };
         
-        $scope.clear();
+        $scope.init();
         
     }
 ]);
