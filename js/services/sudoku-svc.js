@@ -70,13 +70,13 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
         
         var isAllowed = function(sudoku, number, row, column, boxSize, len) {
             for (var i = 0; i < len; i++) { // check the row
-                if (sudoku[row][i] == number) {
+                if ( (sudoku[row][i] == number) && (i != column) ) {
                     return false;
                 }
             }
 
             for (var i = 0; i < len; i++) { // check the column
-                if (sudoku[i][column] == number)  {
+                if ( (sudoku[i][column] == number) && (i != row) )  {
                     return false;
                 }
             }
@@ -85,7 +85,9 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
             var y = column - column % boxSize;
             for (var i = 0; i < boxSize; i++) { // check the box
                 for (var j = 0; j < boxSize; j++) {
-                    if (sudoku[ i+x ][ j+y ] == number) {
+                    var boxRow = i+x;
+                    var boxCol = j+y;
+                    if ( (sudoku[boxRow][boxCol] == number) && (boxRow != row) && (boxCol != column) ) {
                         return false;
                     }
                 }
@@ -106,6 +108,19 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
                 }
 
                 return emptySudokuGrid;                
+            },
+            isSolvable: function(sudoku, boxSize, sudokuSize) {
+                for (var row = 0; row < sudokuSize; row++) {
+                    for (var col = 0; col < sudokuSize; col++) {
+                        if (sudoku[row][col] > 0) {
+                            if ( !isAllowed(sudoku, sudoku[row][col], row, col, boxSize, sudokuSize) ) {	
+                                return false;
+                            }
+                        }
+                    }
+                }
+                
+                return true;
             },
             solve: function(sudoku, boxSize, sudokuSize) {
                 solveSudoku(sudoku, boxSize, sudokuSize);

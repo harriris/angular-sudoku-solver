@@ -55,7 +55,7 @@
         </tr>
     </table>
 
-    <button class="main-button" title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solve()">
+    <button class="main-button" title="{{'DESCRIPTION_SOLVE'| translate}}" ng-click="solveIfPossible()">
         {{'SOLVE'| translate}}
     </button>
     <button class="main-button" title="{{'DESCRIPTION_CLEAR'| translate}}" ng-click="init()">
@@ -67,6 +67,11 @@
     
     <script id="popoverTemplate.html" type="text/ng-template">
         <table id="inputGrid">
+            <tr>
+                <button class="btn btn-default btn-block" ng-click="insertValue(0)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </tr>
             <tr ng-repeat="row in sudokuPopover.inputGrid">
                 <td ng-repeat="col in row">
                     <button class="btn btn-default btn-block" ng-click="insertValue(col)">{{col}}</button>

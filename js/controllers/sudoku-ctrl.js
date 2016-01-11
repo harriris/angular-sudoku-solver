@@ -60,7 +60,7 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
                 $scope.input[row] = [];
             }
             
-            $scope.input[row][col] = value;
+            $scope.input[row][col] = (value == 0) ? "" : value;
             $scope.sudoku[row][col] = value;
             preset[row][col] = value;
             
@@ -92,11 +92,16 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             }
         };
         
-        $scope.solve = function() {
-            SudokuSvc.solve($scope.sudoku, boxSize, $scope.selectedSudokuSize);
-            $scope.input = angular.copy($scope.sudoku);
-            if (!preset) {
-                preset = angular.copy($scope.sudoku);
+        $scope.solveIfPossible = function() {
+            if (SudokuSvc.isSolvable($scope.sudoku, boxSize, $scope.selectedSudokuSize)) {
+                SudokuSvc.solve($scope.sudoku, boxSize, $scope.selectedSudokuSize);
+                $scope.input = angular.copy($scope.sudoku);
+                if (!preset) {
+                    preset = angular.copy($scope.sudoku);
+                }
+            }
+            else {
+                alert($translate.instant("NOT_SOLVABLE"));
             }
         };
         

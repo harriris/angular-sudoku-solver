@@ -8,6 +8,7 @@ var lang_fi = {
     'DESCRIPTION_SOLVE': 'ratkaise Sudoku',
     'DESCRIPTION_CLEAR': 'tyhjennä kaikki ruudut',
     'DESCRIPTION_UNDO': 'kumoa edellinen toiminto',
+    'NOT_SOLVABLE': 'Sudoku ei ole ratkaistavissa!',
 };
 
 var lang_en = {
@@ -20,6 +21,7 @@ var lang_en = {
     'DESCRIPTION_SOLVE': 'solve the Sudoku',
     'DESCRIPTION_CLEAR': 'clear all cells',
     'DESCRIPTION_UNDO': 'undo last action',
+    'NOT_SOLVABLE': 'The Sudoku is not solvable!',
 };
 
 angular.module('sudokuSolver.translations', ['pascalprecht.translate'])

@@ -60,3 +60,7 @@ td.nthChild {
 .main-button:active {
     box-shadow: none;
 }
+
+.glyphicon-remove {
+    color: #ff0000;
+}
