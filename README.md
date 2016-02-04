@@ -4,6 +4,7 @@ A single-page application that solves given Sudoku puzzles by using a backtracki
 ## Features
 
 * Solves 4x4, 9x9 and 16x16 Sudokus
+* Checks solvability before a solving attempt
 * Supports translations (Finnish and English translations included)
 * No keyboard needed for input (has a popover number selection instead)
 
