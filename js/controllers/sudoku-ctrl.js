@@ -105,13 +105,13 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             }
         };
         
-        $scope.init = function() {
-            preset = angular.copy($scope.sudoku);
+        $scope.init = function(undoable) {
+            preset = undoable ? angular.copy($scope.sudoku) : null;
             $scope.sudoku = SudokuSvc.createEmpty($scope.selectedSudokuSize);
             $scope.input = [];
             boxSize = Math.sqrt($scope.selectedSudokuSize);
             $scope.sudokuPopover.row = -1;
-            $scope.sudokuPopover.col = -1;       
+            $scope.sudokuPopover.col = -1;
             initInputGrid(boxSize);
         };
         
@@ -133,7 +133,7 @@ angular.module('sudokuSolver.controllers').controller('SudokuCtrl', [
             }
         };
         
-        $scope.init();
+        $scope.init(false);
         
     }
 ]);
