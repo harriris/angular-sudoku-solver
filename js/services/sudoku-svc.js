@@ -13,7 +13,7 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
             // find the cell with the smallest amount of candidate solutions
             for (var i = 0; i < size; i++) {
                 for (var j = 0; j < size; j++) {
-                    if (sudoku[i][j] == 0) {
+                    if (sudoku[i][j] === 0) {
                         var options = [];
                         var len = 0;
 
@@ -35,11 +35,11 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
                             }
                         }
                     }
-                    if (smallest == 0) {
+                    if (smallest === 0) {
                         break;
                     }
                 }
-                if (smallest == 0) {
+                if (smallest === 0) {
                     break;
                 }
             }
@@ -52,14 +52,14 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
                 }
             }
 
-            sudoku[x][y] = "";
+            sudoku[x][y] = 0;
             return false;            
         };
         
         var isEmpty = function(sudoku, size) {
             for (var i = 0; i < size; i++) {
                 for (var j = 0; j < size; j++) {
-                    if (sudoku[i][j] == 0) {
+                    if (sudoku[i][j] === 0) {
                         return true;
                     }
                 }
@@ -70,13 +70,13 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
         
         var isAllowed = function(sudoku, number, row, column, boxSize, len) {
             for (var i = 0; i < len; i++) { // check the row
-                if ( (sudoku[row][i] == number) && (i != column) ) {
+                if ( (sudoku[row][i] === number) && (i !== column) ) {
                     return false;
                 }
             }
 
             for (var i = 0; i < len; i++) { // check the column
-                if ( (sudoku[i][column] == number) && (i != row) )  {
+                if ( (sudoku[i][column] === number) && (i !== row) )  {
                     return false;
                 }
             }
@@ -87,7 +87,8 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
                 for (var j = 0; j < boxSize; j++) {
                     var boxRow = i+x;
                     var boxCol = j+y;
-                    if ( (sudoku[boxRow][boxCol] == number) && (boxRow != row) && (boxCol != column) ) {
+                    if ( (sudoku[boxRow][boxCol] === number) && 
+                         (boxRow !== row) && (boxCol !== column) ) {
                         return false;
                     }
                 }
@@ -113,7 +114,8 @@ angular.module('sudokuSolver.services').factory('SudokuSvc', [
                 for (var row = 0; row < sudokuSize; row++) {
                     for (var col = 0; col < sudokuSize; col++) {
                         if (sudoku[row][col] > 0) {
-                            if ( !isAllowed(sudoku, sudoku[row][col], row, col, boxSize, sudokuSize) ) {	
+                            if ( !isAllowed(sudoku, sudoku[row][col], row, col,
+                                            boxSize, sudokuSize) ) {	
                                 return false;
                             }
                         }
